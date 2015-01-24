@@ -5,6 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+/**
+	THIS IS THE MOST RECENT VERSION OF THE CODE
+	CHECK: Working after Saturday (WK3) 1/24/15
+	
+	Status: Ready for driver's test
+*/
+
+
 package edu.wpi.first.wpilibj.templates;
 
 
