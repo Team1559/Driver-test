@@ -158,7 +158,7 @@ public class StudentDriver extends IterativeRobot {
        System.out.println("Totes dropped: " + totesDropped + " totes");
        System.out.println("Average Accel: " + averageAccel + "g");
        System.out.println("Max Accel:     " + maxAccel + "g");
-       System.out.println("Jerk Score:    " + totesDropped*averageAccel + " jRk...Lower is bettwe");
+       System.out.println("Jerk Score:    " + totesDropped*averageAccel + " jRk...Lower is better");
        System.out.println("Time:          " + endTime);
        System.out.println("Sabotages:     " + sabotages + "x15 = " + (sabotages * 10) + " points");
 
