@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.can.CANTimeoutException;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -60,6 +61,7 @@ public class StudentDriver extends IterativeRobot {
     int sabotages;
     double totalAccel;
     int readNum;
+    String s;
     
     public void robotInit() {
         
@@ -161,7 +163,11 @@ public class StudentDriver extends IterativeRobot {
        System.out.println("Jerk Score:    " + totesDropped*averageAccel + " jRk...Lower is better");
        System.out.println("Time:          " + endTime);
        System.out.println("Sabotages:     " + sabotages + "x15 = " + (sabotages * 10) + " points");
-
+       
+       s = "KOBAYASHI MARU TEST RESULTS:\n---------------------------------\nTOTES DROPPED: " + totesDropped + " totes\n"
+               + "Average Accel: " + averageAccel + "g\n" + "Max Accel:     " + maxAccel + "g\n" + "Jerk Score:    " + totesDropped*averageAccel + " jRk...Lower is better\n"
+               + "Time:          " + endTime + "\nSabotages:     " + sabotages + "x15 = " + (sabotages * 10) + " points";
+       SmartDashboard.putString("RESULTS", s);
     }
 
     public void teleopPeriodic() {
@@ -186,25 +192,49 @@ public class StudentDriver extends IterativeRobot {
         
         if(evaluator.getRawButton(7)){
             issue = 0; //normal driving
-            
             System.out.println("NORMAL DRIVING");
+            SmartDashboard.putBoolean("NORMAL", true);
+            SmartDashboard.putBoolean("SLOW ROBOT", false);
+            SmartDashboard.putBoolean("LEFT MOTOR DEATH!", false);
+            SmartDashboard.putBoolean("LAG-O-RAMA", false);
+            SmartDashboard.putBoolean("PERIODIC STOP", false);
         } else if(evaluator.getRawButton(8)){
             rd.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
             issue = 1; //slow robot
             sabotages++;
             System.out.println("SLOW ROBOT");
+            SmartDashboard.putBoolean("NORMAL", false);
+            SmartDashboard.putBoolean("SLOW ROBOT", true);
+            SmartDashboard.putBoolean("LEFT MOTOR DEATH!", false);
+            SmartDashboard.putBoolean("LAG-O-RAMA", false);
+            SmartDashboard.putBoolean("PERIODIC STOP", false);
         } else if(evaluator.getRawButton(9)){
             issue = 2; //leftMotor death
             sabotages++;
             System.out.println("LEFT MOTOR DEATH");
+            SmartDashboard.putBoolean("NORMAL", false);
+            SmartDashboard.putBoolean("SLOW ROBOT", false);
+            SmartDashboard.putBoolean("LEFT MOTOR DEATH!", true);
+            SmartDashboard.putBoolean("LAG-O-RAMA", false);
+            SmartDashboard.putBoolean("PERIODIC STOP", false);
         } else if(evaluator.getRawButton(10)){
             issue = 3; //delay
             sabotages++;
             System.out.println("LAG-O-RAMA");
+            SmartDashboard.putBoolean("NORMAL", false);
+            SmartDashboard.putBoolean("SLOW ROBOT", false);
+            SmartDashboard.putBoolean("LEFT MOTOR DEATH!", false);
+            SmartDashboard.putBoolean("LAG-O-RAMA", true);
+            SmartDashboard.putBoolean("PERIODIC STOP", false);
         } else if(evaluator.getRawButton(11)){
             issue = 4; //periodic stop
             sabotages++;
-                System.out.println("PERIODIC STOP");
+            System.out.println("PERIODIC STOP");
+            SmartDashboard.putBoolean("NORMAL", false);
+            SmartDashboard.putBoolean("SLOW ROBOT", false);
+            SmartDashboard.putBoolean("LEFT MOTOR DEATH!", false);
+            SmartDashboard.putBoolean("LAG-O-RAMA", false);
+            SmartDashboard.putBoolean("PERIODIC STOP", true);
         }
         
         switch(issue){
@@ -215,7 +245,6 @@ public class StudentDriver extends IterativeRobot {
                 switch(mode){
                 case 0: //standard arcade
                     rd.arcadeDrive(gamepad);
-                    
                     break;
                 case 1: //tank dual stick
                     rd.tankDrive(joy1, joy2);
