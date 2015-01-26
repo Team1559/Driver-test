@@ -8,7 +8,7 @@
 /**
 	THIS IS THE MOST RECENT VERSION OF THE CODE
 	CHECK: Working after Saturday (WK3) 1/24/15
-	
+
 	Status: Ready for driver's test
 */
 
@@ -37,8 +37,6 @@ public class StudentDriver extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    
-    
     CANJaguar l;
     CANJaguar r;
 //    Victor l;
@@ -148,25 +146,24 @@ public class StudentDriver extends IterativeRobot {
             if(read > dropValue){
                 totesDropped++;
                 System.out.println("\n\n\n\n\n\n\n\n\n\n*******TOTES DROPPED!!!!*******");
-            }    
-        
-        
+            }
+
+
 //        System.out.println(read);
-        
+
     }
-    
     public void disabledInit(){
        stopTimer();
        System.out.println("\n\n\n\n\n\n\n\n\n\nKOBAYASHI MARU TEST RESULTS:\n---------------------------------");
        System.out.println("Totes dropped: " + totesDropped + " totes");
        System.out.println("Average Accel: " + averageAccel + "g");
        System.out.println("Max Accel:     " + maxAccel + "g");
-       System.out.println("Jerk Score:    " + totesDropped*averageAccel + " jRk");
+       System.out.println("Jerk Score:    " + totesDropped*averageAccel + " jRk...Lower is bettwe");
        System.out.println("Time:          " + endTime);
-       System.out.println("Sabotages:     " + sabotages + "x10 = " + (sabotages * 10) + " points");
-        
+       System.out.println("Sabotages:     " + sabotages + "x15 = " + (sabotages * 10) + " points");
+
     }
-    
+
     public void teleopPeriodic() {
         accel();
         //switch mode
